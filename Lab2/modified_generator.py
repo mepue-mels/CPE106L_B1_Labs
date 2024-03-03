@@ -41,10 +41,10 @@ def prepositionalPhrase():
     """Builds and returns a prepositional phrase."""
     return random.choice(prepositions) + " " + nounPhrase()
 
-articleFile = "articles.txt"
-nounFile = "nouns.txt"
-verbFile = "verbs.txt"
-prepositionFile = "prepositions.txt"
+articleFile = "input_files/articles.txt"
+nounFile = "input_files/nouns.txt"
+verbFile = "input_files/verbs.txt"
+prepositionFile = "input_files/prepositions.txt"
 
 articles = getArticles(articleFile)
 nouns = getNouns(nounFile)
