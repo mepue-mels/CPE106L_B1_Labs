@@ -1,25 +1,29 @@
 import random
 
-def getArticles(articleFile, articles):
+def getArticles(articleFile):
+    tempList = []
     with open(articleFile, "r") as file:
-        element = file.read()
-        articles.append(element)
+        tempList.extend(line.strip() for line in file)
+    return tuple(tempList)
 
-def getNouns(nounFile, nouns):
+def getNouns(nounFile):
+    tempList = []
     with open(nounFile, "r") as file:
-        element = file.read()
-        nouns.append(element)
+        tempList.extend(line.strip() for line in file)
+    return tuple(tempList)
 
-def getVerbs(verbFile, verbs):
+def getVerbs(verbFile):
+    tempList = []
     with open(verbFile, "r") as file:
-        element = file.read()
-        verbs.append(element)
+        tempList.extend(line.strip() for line in file)
+    return tuple(tempList)
 
-def getPrepositions(prepositionFile, prepositions):
+def getPrepositions(prepositionFile):
+    tempList = []
     with open(prepositionFile, "r") as file:
-        element = file.read()
-        prepositions.append(element)
-        
+        tempList.extend(line.strip() for line in file)
+    return tuple(tempList)
+
 def sentence():
     """Builds and returns a sentence."""
     return nounPhrase() + " " + verbPhrase()
@@ -36,20 +40,26 @@ def verbPhrase():
 def prepositionalPhrase():
     """Builds and returns a prepositional phrase."""
     return random.choice(prepositions) + " " + nounPhrase()
-    
-articles = ()
-nouns = ()
-verbs = ()
-prepositions = ()
+
+articleFile = "articles.txt"
+nounFile = "nouns.txt"
+verbFile = "verbs.txt"
+prepositionFile = "prepositions.txt"
+
+articles = getArticles(articleFile)
+nouns = getNouns(nounFile)
+verbs = getVerbs(verbFile)
+prepositions = getPrepositions(prepositionFile)
+
 
 def main():
     """Allows the user to input the number of sentences
     to generate."""
+
     number = int(input("Enter the number of sentences: "))
     for count in range(number):
         print(sentence())
 
-# The entry point for program execution
 if __name__ == "__main__":
     main()
 
