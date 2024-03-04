@@ -1,31 +1,33 @@
 import math
 
 def mean(numList):
-    length = len(numList)
-    return float(sum(numList)/length)
+    return sum(numList)/len(numList)
 
 def median(numList):
     length = len(numList)
+    i = length // 2
     # for odd list count = one median
     if length % 2 == 1: 
-        return(numList[int((length + 1)/2)])
+        return(numList[i])
     # for even list count = average of medians
-    else:
-        min = int(length/2)
-        max = int((length/2)+1)
-        return((numList[min]+numList[max])/2)
+    return(sum(numList[i - 1: i + 1])/2)
 
-
-def mode():
-    pass
+def mode(numList):
+    numCount = {}
+    for i in numList:
+        if not i in numCount:
+            numCount[i] = 1
+        else:
+            numCount[i] += 1
+    return [x for x,y in numCount.items() if y == max(numCount.values())]
 
 def main():
-    myList = [18, 19, 19, 19, 20, 23, 25, 26]
-    # myList2 = [73, 80, 82, 93, 83, 83, 86, 90, 90, 89, 75, 82, 94, 82, 82, 84, 85, 82]
+    myList = [18, 19, 19, 19, 20, 20, 20, 23, 25, 26]
     print("Length of list:", len(myList))
+    myList.sort()
     print("Mean:", mean(myList))
     print("Median:", median(myList))
-    # print("Mode:", mode(myList))
+    print("Mode:", mode(myList))
 
 if __name__ == "__main__":
     main()
