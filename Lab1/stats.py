@@ -19,15 +19,24 @@ def mode(numList):
             numCount[i] = 1
         else:
             numCount[i] += 1
-    return [x for x,y in numCount.items() if y == max(numCount.values())]
+    modeList = [x for x,y in numCount.items() if y == max(numCount.values())]
+    if len(modeList) != 1:
+        return "No mode."
+    return modeList
 
 def main():
-    myList = [18, 19, 19, 19, 20, 20, 20, 23, 25, 26]
+    # myList = [18, 19, 19, 19, 20, 23, 25, 26]
+    # get user input
+    myList = input("Enter your list, separated by space: ")
+    myList = myList.split(" ")
+    myList = [int(x) for x in myList]
+
+    # call functions
     print("Length of list:", len(myList))
     myList.sort()
     print("Mean:", mean(myList))
     print("Median:", median(myList))
-    print("Mode:", mode(myList))
+    print("Mode:", str(mode(myList))[1:-1])
 
 if __name__ == "__main__":
     main()
