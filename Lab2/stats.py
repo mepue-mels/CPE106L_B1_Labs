@@ -1,62 +1,59 @@
-#!/usr/bin/env python3
-def getMode():
-        fileName = input("Enter the file name: ")
-        f = open(fileName, 'r')
+def getMode(words):
+    if not words:
+        return 0
 
-        words = []
-        for line in f:
-            wordsInLine = line.split()
-        for word in wordsInLine:
-            words.append(word.upper())
-
-        theDictionary = {}
-        for word in words:
-            number = theDictionary.get(word, None)
-        if number == None:
+    theDictionary = {}
+    for word in words:
+        number = theDictionary.get(word, None)
+        if number is None:
             theDictionary[word] = 1
         else:
-            theDictionary[word] = number + 1
+            theDictionary[word] += 1
 
-        theMaximum = max(theDictionary.values())
-        for key in theDictionary:
-            if theDictionary[key] == theMaximum:
-                return key
-                break
-            else:
-                return 0
+    theMaximum = max(theDictionary.values())
 
-def getMedian():
-    fileName = input("Enter the file name: ")
-    f = open(fileName, 'r')
+    if theMaximum == 1:
+        return 0
 
-    numbers = []
-    for line in f:
-        words = line.split()
-        for word in words:
-            numbers.append(float(word))
+    modes = [key for key, value in theDictionary.items() if value == theMaximum]
+    return modes[0]
 
-        numbers.sort()
-        midpoint = len(numbers) // 2
-        print("The median is", end=" ")
-        if len(numbers) % 2 == 1:
-            return numbers[midpoint]
-        else:
-            return ((numbers[midpoint] + numbers[midpoint - 1]) / 2)
 
-def getMean():
-    fileName = input("Enter the file name: ")
-    f = open(fileName, 'r')
+def getMedian(numbers):
+    numbers.sort()
+    midpoint = len(numbers) // 2
+    if len(numbers) % 2 == 1:
+        return numbers[midpoint]
+    else:
+        return int((numbers[midpoint] + numbers[midpoint - 1]) / 2)
 
-    numbers = []
-    for line in f:
-        words = line.split()
-        for word in words:
-            numbers.append(float(word))
 
-    length = len(numbers)
+def getMean(numbers):
     sum = 0
 
     for x in numbers:
-        sum += x
+            sum += x
 
-    return ( sum / length )
+    return (sum / len(numbers))
+
+
+def main():
+    list_length = int(input("Enter the list length: "))
+    numberList = [0] * list_length
+
+    for i in range( list_length ):
+        numberList[i] = int(input("Enter element: "))
+
+    print("[0] Mean [1] Median [2] Mode")
+
+    choice = int(input("Enter your choice: "))
+
+    if (choice == 0):
+        print( getMean(numberList) )
+    elif (choice == 1):
+        print( getMedian(numberList) )
+    elif (choice == 2):
+        print( getMode(numberList) )
+
+if __name__ == "__main__":
+    main()
